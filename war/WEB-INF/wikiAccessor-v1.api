@@ -1,0 +1,90 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://wikiaccessor.appspot.com/_ah/api",
+  "name" : "wikiAccessor",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://wikiaccessor.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "wikiAccessor.get" : {
+      "path" : "{title}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.wa.api.WikiAccessorApi.getWikiInfo",
+      "request" : {
+        "parameters" : {
+          "title" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "WikiInfo" : {
+        "id" : "WikiInfo",
+        "type" : "object",
+        "properties" : {
+          "title" : {
+            "type" : "string"
+          },
+          "director" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "writer" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "music" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "studio" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.wa.api.WikiAccessorApi.getWikiInfo" : {
+        "response" : {
+          "$ref" : "WikiInfo"
+        }
+      }
+    }
+  }
+}
